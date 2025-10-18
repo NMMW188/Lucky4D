@@ -7,21 +7,20 @@
   <meta name="description" content="RamalNasib menjana set nombor bertuah menggunakan analitik corak & AI. Bayar melalui FPX Payment, terima terus secara peribadi di Telegram. Privasi terjamin, anti-share watermark." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* CTA effects */
     .glow-btn { box-shadow: 0 8px 24px rgba(217,119,6,0.35), 0 2px 8px rgba(217,119,6,0.2); }
     .glow-btn:hover { box-shadow: 0 10px 32px rgba(217,119,6,0.45), 0 4px 12px rgba(217,119,6,0.25); }
     .shimmer-btn { position: relative; overflow: hidden; }
-    .shimmer-btn::before {
-      content: ""; position: absolute; inset: 0; translate: -120% 0; width: 140%;
+    .shimmer-btn::before { content: ""; position: absolute; inset: 0; translate: -120% 0; width: 140%;
       background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0.18) 60%, transparent 100%);
-      animation: shimmer 2.2s infinite ease-in-out;
-    }
+      animation: shimmer 2.2s infinite ease-in-out; }
     @keyframes shimmer { 0% { translate: -120% 0; } 55% { translate: 0 0; } 100% { translate: 120% 0; } }
     .pulse-glow { box-shadow: 0 0 0 0 rgba(245,158,11,.55); animation: pulse 2.2s infinite; }
     @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(245,158,11,.45);}70%{box-shadow:0 0 0 16px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);} }
   </style>
 </head>
 <body class="bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900">
-  <!-- Promo Bar -->
+  <!-- ============== PROMO BAR (with countdown) ============== -->
   <div class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white text-sm">
     <div class="max-w-6xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4 text-center sm:text-left">
       <span class="flex items-center gap-2"><strong>🔥 Promosi Pelancaran:</strong> Hanya RM10 untuk akses penuh RamalNasib!</span>
@@ -32,7 +31,7 @@
     </div>
   </div>
 
-  <!-- Navbar -->
+  <!-- ===================== NAV ===================== -->
   <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-amber-200">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -49,13 +48,13 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- ===================== HERO ===================== -->
   <section id="home" class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <div class="grid md:grid-cols-2 gap-10 items-center">
       <div>
         <div class="inline-flex items-center gap-2 rounded-full border border-amber-200 px-3 py-1 text-xs bg-amber-50 text-amber-700 shadow-sm">🧠 Dikuasakan AI • 🔒 Privasi Terjamin • ⚡ Hasil Segera</div>
         <h1 class="mt-3 text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">Pilih Nombor Dengan <span class="text-amber-600">Yakin</span><br/>— Terima <span class="text-amber-600">Serta‑merta</span> di Telegram</h1>
-        <p class="mt-4 text-[15px] text-slate-700 leading-relaxed">RamalNasib menggunakan AI untuk meramal corak 4D dan memberi anda <strong>set nombor bernilai tinggi</strong>. Selepas bayaran, set dihantar terus ke <strong>Telegram peribadi anda</strong> — cepat dan rahsia.</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-slate-700">RamalNasib menggunakan AI untuk meramal corak 4D dan memberi anda <strong>set nombor bernilai tinggi</strong>. Selepas bayaran, set dihantar terus ke <strong>Telegram peribadi anda</strong> — cepat dan rahsia.</p>
 
         <div class="mt-6 mx-auto rounded-2xl bg-gradient-to-r from-yellow-100 to-amber-50 border border-amber-200 shadow-sm p-4 md:p-5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[15px]">
@@ -75,7 +74,7 @@
     </div>
   </section>
 
-  <!-- Pricing -->
+  <!-- ===================== PRICING ===================== -->
   <section id="harga" class="max-w-6xl mx-auto px-4 py-10">
     <div class="rounded-3xl border border-amber-200 bg-white p-6">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
@@ -97,19 +96,75 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section id="testimoni" class="max-w-6xl mx-auto px-4 py-10">
-    <div class="rounded-3xl border border-amber-200 bg-white p-6 md:p-10 shadow-sm">
-      <h3 class="text-2xl font-bold text-amber-700 mb-4">Apa kata pelanggan</h3>
-      <div class="grid md:grid-cols-3 gap-4 text-sm">
-        <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Tak perlu tunggu — bayar je, bot terus DM. Laju!”</blockquote><figcaption class="mt-2 text-slate-500">— Faris</figcaption></figure>
-        <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Sangat private & mudah nak tebus kalau terlepas.”</blockquote><figcaption class="mt-2 text-slate-500">— Mira</figcaption></figure>
-        <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Berbaloi dengan harga. Proses memang smooth.”</blockquote><figcaption class="mt-2 text-slate-500">— Kelvin</figcaption></figure>
+  <!-- ===================== CHECKOUT ===================== -->
+  <section id="bayar" class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
+        <h3 class="text-2xl font-bold text-amber-700">Maklumat Pembeli</h3>
+        <div class="mt-4 grid gap-3">
+          <label class="text-sm">Nama
+            <input id="name" type="text" class="mt-1 w-full rounded-xl border px-3 py-2 border-amber-300 focus:border-amber-500 focus:ring-amber-400" placeholder="Nama penuh" />
+          </label>
+          <label class="text-sm">Email
+            <input id="email" type="email" class="mt-1 w-full rounded-xl border px-3 py-2 border-amber-300 focus:border-amber-500 focus:ring-amber-400" placeholder="email@contoh.com" />
+          </label>
+        </div>
+
+        <div class="mt-4">
+          <p class="text-sm font-semibold text-slate-700">Saluran Penghantaran</p>
+          <div class="mt-2 flex gap-4">
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="channel" id="chTg" value="telegram" checked /> Telegram</label>
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="channel" id="chWa" value="whatsapp" /> WhatsApp</label>
+          </div>
+        </div>
+
+        <div id="tgWrap" class="mt-3">
+          <label class="text-sm">Telegram Username
+            <input id="tgUser" type="text" class="mt-1 w-full rounded-xl border px-3 py-2 border-amber-300 focus:border-amber-500 focus:ring-amber-400" placeholder="contoh: Lucky4D (tanpa @)" />
+          </label>
+          <p class="mt-1 text-xs text-slate-500">Buka bot <a href="https://t.me/Lucky4D_bot" target="_blank" class="underline text-amber-700">@Lucky4D_bot</a> dan hantar <code>/start</code>.</p>
+        </div>
+
+        <div id="waWrap" class="mt-3 hidden">
+          <label class="text-sm">WhatsApp No (format antarabangsa)
+            <input id="waPhone" type="tel" class="mt-1 w-full rounded-xl border px-3 py-2 border-amber-300 focus:border-amber-500 focus:ring-amber-400" placeholder="contoh: 60123456789" />
+          </label>
+        </div>
+
+        <!-- Turn primary action into an anchor so it still works without JS -->
+        <a id="payLink" href="#" class="mt-5 w-full inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold py-3 shadow hover:opacity-90 shimmer-btn glow-btn">Teruskan ke Pembayaran</a>
+        <noscript>
+          <p class="mt-2 text-xs">JavaScript dimatikan. <a href="https://dev.toyyibpay.com/AI-LP" class="underline text-amber-700">Pergi ke halaman FPX Payment</a>.</p>
+        </noscript>
+        <div class="mt-3 flex items-center gap-2 text-xs text-slate-500"><span class="w-4 h-4 rounded-full bg-amber-200 border border-amber-400"></span>Bayaran selamat melalui FPX Payment.</div>
+        <p class="mt-2 text-xs text-slate-500">Selepas berjaya: jika belum terima DM, tebus manual di Telegram dengan <code>/claim &lt;Payment Reference No&gt;</code>.</p>
+      </div>
+
+      <!-- Claim Helper + Guide -->
+      <div class="rounded-3xl border border-amber-200 bg-white p-6">
+        <h3 class="text-2xl font-bold text-amber-700">Cara Tebus (Manual)</h3>
+        <ol class="list-decimal ml-5 mt-2 space-y-2 text-sm">
+          <li>Buka bot Telegram: <a href="https://t.me/Lucky4D_bot" target="_blank" class="underline text-amber-700">@Lucky4D_bot</a></li>
+          <li>Hantar: <code>/start</code></li>
+          <li>Hantar: <code>/claim &lt;Payment Reference No&gt;</code></li>
+        </ol>
+        <div class="mt-4">
+          <label class="text-sm">Payment Reference No
+            <input id="refInput" type="text" class="mt-1 w-full rounded-xl border px-3 py-2 border-amber-300 focus:border-amber-500 focus:ring-amber-400" placeholder="Tampal nombor rujukan daripada resit FPX Payment" />
+          </label>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <button id="copyRefBtn" class="rounded-2xl border border-amber-400 px-4 py-2 hover:bg-amber-50">Salin Nombor</button>
+            <button id="copyClaimBtn" class="rounded-2xl border border-amber-400 px-4 py-2 hover:bg-amber-50">Salin Arahan /claim</button>
+            <a href="https://t.me/Lucky4D_bot" target="_blank" class="rounded-2xl border border-amber-400 px-4 py-2 hover:bg-amber-50">Buka Bot</a>
+          </div>
+          <p id="copyNote" class="mt-2 text-xs text-emerald-600 hidden">Disalin ke papan keratan ✅</p>
+        </div>
+        <p class="mt-3 text-xs text-slate-500">Setiap Payment Reference No hanya boleh ditebus oleh satu akaun Telegram.</p>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- ===================== FAQ ===================== -->
   <section id="faq" class="max-w-6xl mx-auto px-4 py-10">
     <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
       <h3 class="text-2xl font-bold text-amber-700">Soalan Lazim</h3>
@@ -122,7 +177,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ===================== FOOTER ===================== -->
   <footer class="border-t border-amber-200 bg-white">
     <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-600 flex items-center justify-between">
       <span>© <span id="year"></span> RamalNasib</span>
@@ -130,11 +185,78 @@
     </div>
   </footer>
 
+  <!-- Floating CTA -->
+  <a href="#bayar" class="fixed bottom-5 right-5 md:right-8 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold shadow-lg px-5 py-3 hover:opacity-90 shimmer-btn glow-btn">💰 Beli Sekarang</a>
+  <!-- Floating mini countdown badge -->
+  <div class="fixed bottom-24 right-5 md:right-8 bg-amber-600 text-white text-xs font-semibold rounded-full px-3 py-2 shadow-lg ring-2 ring-amber-300/50">
+    ⏳ <span id="floatCountdown">--:--:--</span>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
   <script>
-    document.addEventListener('DOMContentLoaded',()=>{
-      const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
-      function updateCountdown(){const now=new Date(),end=new Date();end.setHours(23,59,59,999);const diff=end-now;if(diff<=0){document.getElementById('dealCountdown').innerText='00:00:00';return;}const h=String(Math.floor(diff/36e5)).padStart(2,'0'),m=String(Math.floor(diff%36e5/6e4)).padStart(2,'0'),s=String(Math.floor(diff%6e4/1e3)).padStart(2,'0');document.getElementById('dealCountdown').innerText=`${h}:${m}:${s}`}
-      setInterval(updateCountdown,1000);updateCountdown();
+    const FPX_LINK = "https://dev.toyyibpay.com/AI-LP"; // FPX payment link (masked)
+    document.addEventListener('DOMContentLoaded', () => {
+      const year = document.getElementById('year'); if (year) year.textContent = new Date().getFullYear();
+
+      const chTg = document.getElementById('chTg');
+      const chWa = document.getElementById('chWa');
+      const tgWrap = document.getElementById('tgWrap');
+      const waWrap = document.getElementById('waWrap');
+      const tgUser = document.getElementById('tgUser');
+      const waPhone = document.getElementById('waPhone');
+      const nameEl = document.getElementById('name');
+      const emailEl = document.getElementById('email');
+      const payLink = document.getElementById('payLink');
+
+      const refInput = document.getElementById('refInput');
+      const copyRefBtn = document.getElementById('copyRefBtn');
+      const copyClaimBtn = document.getElementById('copyClaimBtn');
+      const copyNote = document.getElementById('copyNote');
+
+      function updateChannelUI(){
+        const isTg = chTg?.checked; tgWrap?.classList.toggle('hidden', !isTg); waWrap?.classList.toggle('hidden', !!isTg);
+      }
+      chTg?.addEventListener('change', updateChannelUI);
+      chWa?.addEventListener('change', updateChannelUI);
+      updateChannelUI();
+
+      function saveProfile(){
+        const p = { name:nameEl?.value?.trim()||'', email:emailEl?.value?.trim()||'', channel: chTg?.checked ? 'telegram' : 'whatsapp', tg:(tgUser?.value||'').replace(/^@/, '').trim(), wa:(waPhone?.value||'').trim() };
+        try { localStorage.setItem('rn_profile', JSON.stringify(p)); } catch {}
+        return p;
+      }
+      function loadProfile(){
+        try { const p = JSON.parse(localStorage.getItem('rn_profile')||'null'); if(!p) return; nameEl.value=p.name||''; emailEl.value=p.email||''; (p.channel==='whatsapp'?chWa:chTg).checked=true; updateChannelUI(); tgUser.value=p.tg||''; waPhone.value=p.wa||''; } catch {}
+      }
+      loadProfile();
+
+      function buildPayUrl(){
+        const p = saveProfile();
+        const qp = new URLSearchParams({ ref:'ramalnasib', name:p.name||'buyer', email:p.email||'', channel:p.channel, tg:p.tg, wa:p.wa }).toString();
+        return `${FPX_LINK}?${qp}`;
+      }
+      function refreshPayHref(){ try { payLink.href = buildPayUrl(); } catch { payLink.href = FPX_LINK; } }
+      ['input','change'].forEach(evt=>{ [nameEl,emailEl,tgUser,waPhone,chTg,chWa].forEach(el=> el && el.addEventListener(evt, refreshPayHref)); });
+      refreshPayHref();
+
+      async function copy(text){ try { await navigator.clipboard.writeText(text); copyNote?.classList.remove('hidden'); setTimeout(()=>copyNote?.classList.add('hidden'), 1500);} catch { alert('Tidak dapat salin.'); } }
+      copyRefBtn?.addEventListener('click', ()=>{ const v=refInput?.value?.trim(); if(!v) return alert('Masukkan Payment Reference No.'); copy(v); });
+      copyClaimBtn?.addEventListener('click', ()=>{ const v=refInput?.value?.trim(); if(!v) return alert('Masukkan Payment Reference No.'); copy(`/claim ${v}`); });
+
+      // ======= Countdown to end of day (both bars) =======
+      function tick(){
+        const now=new Date(); const end=new Date(); end.setHours(23,59,59,999);
+        const diff=end-now; const h=String(Math.max(0,Math.floor(diff/36e5))).padStart(2,'0'); const m=String(Math.max(0,Math.floor(diff%36e5/6e4))).padStart(2,'0'); const s=String(Math.max(0,Math.floor(diff%6e4/1e3))).padStart(2,'0');
+        const t=`${h}:${m}:${s}`; const d=document.getElementById('dealCountdown'); const f=document.getElementById('floatCountdown'); if(d) d.textContent=t; if(f) f.textContent=t;
+      }
+      tick(); setInterval(tick, 1000);
+
+      // ======= Daily slots (scarcity) =======
+      function initSlots(){ const today=new Date().toISOString().slice(0,10); const saved=localStorage.getItem('rn_slots_date'); let left=Number(localStorage.getItem('rn_slots_left')||'0'); if(saved!==today||!left){ left=Math.floor(Math.random()*7)+9; localStorage.setItem('rn_slots_date',today); localStorage.setItem('rn_slots_left',String(left)); } renderSlots(left); }
+      function renderSlots(n){ const el=document.getElementById('slotsLeft'); if(el) el.textContent=String(Math.max(n,2)); }
+      function updateSlots(delta){ const today=new Date().toISOString().slice(0,10); const saved=localStorage.getItem('rn_slots_date'); if(saved!==today) initSlots(); let left=Number(localStorage.getItem('rn_slots_left')||'0'); left=Math.max(left+(delta||0),2); localStorage.setItem('rn_slots_left',String(left)); renderSlots(left); }
+      initSlots();
+      payLink?.addEventListener('click', ()=>{ updateSlots(-1); });
     });
   </script>
 </body>
