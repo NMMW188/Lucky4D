@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terima kasih — RamalNasib</title>
+  <meta name="description" content="Terima kasih atas pembayaran. Seterusnya, nombor ramalan akan dihantar ke Telegram anda secara automatik." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .shimmer::before{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.2) 40%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.2) 60%,transparent 100%);animation:sh 2.5s infinite ease-in-out}
+    @keyframes sh{0%{transform:translateX(-120%)}55%{transform:translateX(0)}100%{transform:translateX(120%)}}
+    .pulse{animation:pulse 2s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}70%{box-shadow:0 0 0 16px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+  </style>
+</head>
+<body class="bg-gradient-to-b from-emerald-50 via-white to-amber-50 text-slate-900">
+  <header class="border-b bg-white/70 backdrop-blur">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="./" class="font-extrabold text-amber-700">RamalNasib</a>
+      <a href="https://t.me/Lucky4D_bot" target="_blank" class="text-sm text-amber-700 underline">Buka Telegram Bot</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <div class="rounded-3xl border border-emerald-200 bg-white p-6 md:p-8 relative overflow-hidden shimmer">
+      <div class="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-emerald-100"></div>
+      <div class="relative">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-emerald-500 text-white grid place-items-center">✓</div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-emerald-700">Pembayaran Berjaya!</h1>
+        </div>
+        <p class="mt-2 text-slate-600">Terima kasih, <span id="nameSpan" class="font-semibold">Pelanggan</span>. Kami sedang menghantar set nombor anda ke Telegram: <span class="font-semibold">@<span id="tgSpan">username</span></span>.</p>
+
+        <div class="mt-5 grid md:grid-cols-2 gap-6">
+          <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
+            <h2 class="font-bold text-amber-700">Apa yang berlaku seterusnya?</h2>
+            <ol class="mt-2 text-sm text-slate-700 space-y-1">
+              <li>1) Bot akan DM nombor anda <strong>secara automatik</strong> (biasanya &lt; 1 minit).</li>
+              <li>2) Jika belum pernah chat bot, buka <a href="https://t.me/Lucky4D_bot" target="_blank" class="underline text-amber-700">@Lucky4D_bot</a> dan hantar <code>/start</code>.</li>
+              <li>3) Jika masih belum terima, tebus manual menggunakan <code>/claim &lt;Payment Reference No&gt;</code>.</li>
+            </ol>
+          </div>
+
+          <div class="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4">
+            <h2 class="font-bold text-emerald-700">Payment Reference No</h2>
+            <div class="mt-2 flex items-center gap-2">
+              <input id="refInput" class="w-full rounded-xl border px-3 py-2 border-emerald-300 focus:border-emerald-500" placeholder="Contoh: TP2510182168382315" />
+              <button id="copyRef" class="rounded-xl border px-3 py-2 border-emerald-400 hover:bg-emerald-50">Salin</button>
+            </div>
+            <div class="mt-2 flex items-center gap-2">
+              <input id="claimInput" class="w-full rounded-xl border px-3 py-2 border-emerald-300 focus:border-emerald-500" readonly />
+              <button id="copyClaim" class="rounded-xl border px-3 py-2 border-emerald-400 hover:bg-emerald-50">Salin /claim</button>
+            </div>
+            <a id="openBot" href="https://t.me/Lucky4D_bot" target="_blank" class="mt-3 inline-flex items-center justify-center rounded-xl bg-emerald-600 text-white px-4 py-2 pulse">Buka Bot Sekarang</a>
+            <p id="copied" class="text-xs text-emerald-700 mt-2 hidden">Disalin ✅</p>
+          </div>
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-slate-200 p-4">
+          <h3 class="font-bold text-slate-700">Tip Pantas</h3>
+          <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
+            <li>Pastikan <strong>username Telegram</strong> anda betul (contoh: <strong>@Lucky4D</strong>, tanpa spacing).</li>
+            <li>Jika nombor tidak masuk, hantar <code>/start</code> sekali di bot untuk aktifkan DM.</li>
+            <li>Elak berkongsi nombor — setiap set ditanda dengan Payment Reference No anda.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-6 text-xs text-slate-500">© <span id="year"></span> RamalNasib</div>
+  </main>
+
+  <script>
+    const qs = new URLSearchParams(location.search);
+    const name   = qs.get('name') || 'Pelanggan';
+    const tg     = (qs.get('tg') || '').replace(/^@/, '');
+    // ToyyibPay DOES NOT include ref in the return URL by default — user can paste from receipt if needed.
+    const ref    = qs.get('ref') || ''; // keep it for future if you decide to append from callback
+
+    // Fill UI
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('nameSpan').textContent = name;
+    document.getElementById('tgSpan').textContent = tg || 'username';
+
+    const refInput   = document.getElementById('refInput');
+    const claimInput = document.getElementById('claimInput');
+    const copied = document.getElementById('copied');
+
+    if (ref) refInput.value = ref;
+    function updateClaim() {
+      const v = (refInput.value || '').trim();
+      claimInput.value = v ? `/claim ${v}` : '';
+    }
+    refInput.addEventListener('input', updateClaim);
+    updateClaim();
+
+    async function copy(t) {
+      try { await navigator.clipboard.writeText(t); copied.classList.remove('hidden'); setTimeout(()=>copied.classList.add('hidden'), 1200); }
+      catch { alert('Tidak dapat salin'); }
+    }
+    document.getElementById('copyRef').addEventListener('click', ()=> {
+      const v = (refInput.value || '').trim();
+      if (!v) return alert('Masukkan Payment Reference No (dari resit).');
+      copy(v);
+    });
+    document.getElementById('copyClaim').addEventListener('click', ()=> {
+      const v = (refInput.value || '').trim();
+      if (!v) return alert('Masukkan Payment Reference No (dari resit).');
+      copy(`/claim ${v}`);
+    });
+
+    // Convenience: open bot with username hint in deep link title (Telegram ignores custom query for privacy)
+    const openBot = document.getElementById('openBot');
+    openBot.href = `https://t.me/Lucky4D_bot`;
+  </script>
+</body>
+</html>
