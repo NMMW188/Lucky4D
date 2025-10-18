@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Terima kasih — RamalNasib</title>
-  <meta name="description" content="Terima kasih atas pembayaran. Seterusnya, nombor ramalan akan dihantar ke Telegram anda secara automatik." />
+  <meta name="description" content="Semak status pembayaran anda dan ikuti langkah susulan." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .shimmer::before{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.2) 40%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.2) 60%,transparent 100%);animation:sh 2.5s infinite ease-in-out}
@@ -22,29 +22,49 @@
   </header>
 
   <main class="max-w-4xl mx-auto px-4 py-10">
-    <div class="rounded-3xl border border-emerald-200 bg-white p-6 md:p-8 relative overflow-hidden shimmer">
-      <div class="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-emerald-100"></div>
-      <div class="relative">
+    <div id="card" class="rounded-3xl border bg-white p-6 md:p-8 relative overflow-hidden shimmer">
+      <div class="relative" id="content">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <div class="text-center mt-6 text-xs text-slate-500">© <span id="year"></span> RamalNasib</div>
+  </main>
+
+  <script>
+    const WORKER_BASE = "https://ramalnasib-worker.nickson-richard87.workers.dev";
+
+    const qs = new URLSearchParams(location.search);
+    const name = qs.get('name') || 'Pelanggan';
+    const tg   = (qs.get('tg') || '').replace(/^@/, '');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const content = document.getElementById('content');
+
+    function successUI(data){
+      const ref = data.ref || '';
+      return `
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-full bg-emerald-500 text-white grid place-items-center">✓</div>
           <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-emerald-700">Pembayaran Berjaya!</h1>
         </div>
-        <p class="mt-2 text-slate-600">Terima kasih, <span id="nameSpan" class="font-semibold">Pelanggan</span>. Kami sedang menghantar set nombor anda ke Telegram: <span class="font-semibold">@<span id="tgSpan">username</span></span>.</p>
+        <p class="mt-2 text-slate-600">Terima kasih, <span class="font-semibold">${escapeHtml(name)}</span>. Set nombor anda akan dihantar ke Telegram: <span class="font-semibold">@${escapeHtml(tg || 'username')}</span>.</p>
 
         <div class="mt-5 grid md:grid-cols-2 gap-6">
           <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
             <h2 class="font-bold text-amber-700">Apa yang berlaku seterusnya?</h2>
             <ol class="mt-2 text-sm text-slate-700 space-y-1">
-              <li>1) Bot akan DM nombor anda <strong>secara automatik</strong> (biasanya &lt; 1 minit).</li>
+              <li>1) Bot akan DM nombor anda <strong>secara automatik</strong> (kebiasaannya &lt; 1 minit).</li>
               <li>2) Jika belum pernah chat bot, buka <a href="https://t.me/Lucky4D_bot" target="_blank" class="underline text-amber-700">@Lucky4D_bot</a> dan hantar <code>/start</code>.</li>
-              <li>3) Jika masih belum terima, tebus manual menggunakan <code>/claim &lt;Payment Reference No&gt;</code>.</li>
+              <li>3) Jika belum terima, tebus manual dengan <code>/claim &lt;Payment Reference No&gt;</code>.</li>
             </ol>
           </div>
 
           <div class="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4">
             <h2 class="font-bold text-emerald-700">Payment Reference No</h2>
             <div class="mt-2 flex items-center gap-2">
-              <input id="refInput" class="w-full rounded-xl border px-3 py-2 border-emerald-300 focus:border-emerald-500" placeholder="Contoh: TP2510182168382315" />
+              <input id="refInput" class="w-full rounded-xl border px-3 py-2 border-emerald-300 focus:border-emerald-500" placeholder="Contoh: TP2510182168382315" value="${escapeHtml(ref)}" />
               <button id="copyRef" class="rounded-xl border px-3 py-2 border-emerald-400 hover:bg-emerald-50">Salin</button>
             </div>
             <div class="mt-2 flex items-center gap-2">
@@ -55,63 +75,86 @@
             <p id="copied" class="text-xs text-emerald-700 mt-2 hidden">Disalin ✅</p>
           </div>
         </div>
+      `;
+    }
 
-        <div class="mt-6 rounded-2xl border border-slate-200 p-4">
-          <h3 class="font-bold text-slate-700">Tip Pantas</h3>
-          <ul class="mt-2 text-sm text-slate-600 list-disc ml-5 space-y-1">
-            <li>Pastikan <strong>username Telegram</strong> anda betul (contoh: <strong>@Lucky4D</strong>, tanpa spacing).</li>
-            <li>Jika nombor tidak masuk, hantar <code>/start</code> sekali di bot untuk aktifkan DM.</li>
-            <li>Elak berkongsi nombor — setiap set ditanda dengan Payment Reference No anda.</li>
-          </ul>
+    function failedUI(data){
+      const why = data.reason || "Pembayaran tidak berjaya atau dibatalkan.";
+      return `
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-rose-500 text-white grid place-items-center">!</div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-rose-700">Pembayaran Tidak Berjaya</h1>
         </div>
-      </div>
-    </div>
+        <p class="mt-2 text-slate-600">Hai <span class="font-semibold">${escapeHtml(name)}</span>. ${escapeHtml(why)}</p>
 
-    <div class="text-center mt-6 text-xs text-slate-500">© <span id="year"></span> RamalNasib</div>
-  </main>
+        <div class="mt-5 grid md:grid-cols-2 gap-6">
+          <div class="rounded-2xl border border-slate-200 bg-white p-4">
+            <h2 class="font-bold text-slate-700">Apa yang boleh anda buat?</h2>
+            <ol class="mt-2 text-sm text-slate-700 space-y-1">
+              <li>1) Cuba bayar semula — pastikan maklumat diisi dengan betul.</li>
+              <li>2) Jika caj telah dibuat tetapi tidak berjaya, tunggu 1–2 minit dan cuba semula.</li>
+              <li>3) Bantuan: hubungi kami dan sertakan resit / Payment Reference No.</li>
+            </ol>
+            <a href="./#bayar" class="mt-3 inline-flex items-center justify-center rounded-xl bg-amber-600 text-white px-4 py-2">Cuba Bayar Semula</a>
+          </div>
 
-  <script>
-    const qs = new URLSearchParams(location.search);
-    const name   = qs.get('name') || 'Pelanggan';
-    const tg     = (qs.get('tg') || '').replace(/^@/, '');
-    // ToyyibPay DOES NOT include ref in the return URL by default — user can paste from receipt if needed.
-    const ref    = qs.get('ref') || ''; // keep it for future if you decide to append from callback
-
-    // Fill UI
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('nameSpan').textContent = name;
-    document.getElementById('tgSpan').textContent = tg || 'username';
-
-    const refInput   = document.getElementById('refInput');
-    const claimInput = document.getElementById('claimInput');
-    const copied = document.getElementById('copied');
-
-    if (ref) refInput.value = ref;
-    function updateClaim() {
-      const v = (refInput.value || '').trim();
-      claimInput.value = v ? `/claim ${v}` : '';
+          <div class="rounded-2xl border border-rose-200 bg-rose-50 p-4">
+            <h2 class="font-bold text-rose-700">Nota</h2>
+            <p class="mt-2 text-sm text-slate-700">Anda tidak akan menerima set nombor sehingga pembayaran disahkan. Tiada mesej akan dihantar oleh bot.</p>
+          </div>
+        </div>
+      `;
     }
-    refInput.addEventListener('input', updateClaim);
-    updateClaim();
 
-    async function copy(t) {
-      try { await navigator.clipboard.writeText(t); copied.classList.remove('hidden'); setTimeout(()=>copied.classList.add('hidden'), 1200); }
-      catch { alert('Tidak dapat salin'); }
+    function skeletonUI(){
+      return `
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-slate-200 animate-pulse"></div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-500">Mengesahkan pembayaran...</h1>
+        </div>
+        <p class="mt-2 text-slate-500">Sila tunggu sebentar.</p>
+      `;
     }
-    document.getElementById('copyRef').addEventListener('click', ()=> {
-      const v = (refInput.value || '').trim();
-      if (!v) return alert('Masukkan Payment Reference No (dari resit).');
-      copy(v);
-    });
-    document.getElementById('copyClaim').addEventListener('click', ()=> {
-      const v = (refInput.value || '').trim();
-      if (!v) return alert('Masukkan Payment Reference No (dari resit).');
-      copy(`/claim ${v}`);
-    });
 
-    // Convenience: open bot with username hint in deep link title (Telegram ignores custom query for privacy)
-    const openBot = document.getElementById('openBot');
-    openBot.href = `https://t.me/Lucky4D_bot`;
+    function wireCopy(){
+      const refInput   = document.getElementById('refInput');
+      const claimInput = document.getElementById('claimInput');
+      const copied = document.getElementById('copied');
+      if (!refInput || !claimInput) return;
+      function updateClaim(){ const v=(refInput.value||'').trim(); claimInput.value = v ? `/claim ${v}` : ''; }
+      refInput.addEventListener('input', updateClaim); updateClaim();
+      async function copy(t){ try{ await navigator.clipboard.writeText(t); copied?.classList.remove('hidden'); setTimeout(()=>copied?.classList.add('hidden'),1200);}catch{alert('Tidak dapat salin');} }
+      document.getElementById('copyRef')?.addEventListener('click', ()=>{ const v=(refInput.value||'').trim(); if(!v) return alert('Masukkan Payment Reference No (dari resit).'); copy(v); });
+      document.getElementById('copyClaim')?.addEventListener('click', ()=>{ const v=(refInput.value||'').trim(); if(!v) return alert('Masukkan Payment Reference No (dari resit).'); copy(`/claim ${v}`); });
+    }
+
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m])); }
+
+    async function checkStatus() {
+      if (!tg) { content.innerHTML = failedUI({ reason: "Tiada username Telegram." }); return; }
+      content.innerHTML = skeletonUI();
+      try{
+        const r = await fetch(`${WORKER_BASE}/status?tg=${encodeURIComponent(tg)}`, { cache: "no-store" });
+        const j = await r.json().catch(()=>({ state:"unknown" }));
+        if (j.state === "paid") { content.innerHTML = successUI(j); wireCopy(); }
+        else if (j.state === "failed") { content.innerHTML = failedUI(j); }
+        else {
+          // If gateway slower than browser redirect, poll a few times
+          let tries = 0;
+          const t = setInterval(async ()=>{
+            tries++;
+            const r2 = await fetch(`${WORKER_BASE}/status?tg=${encodeURIComponent(tg)}`, { cache: "no-store" });
+            const j2 = await r2.json().catch(()=>({ state:"unknown" }));
+            if (j2.state === "paid") { clearInterval(t); content.innerHTML = successUI(j2); wireCopy(); }
+            else if (j2.state === "failed" || tries >= 8) { clearInterval(t); content.innerHTML = failedUI(j2); }
+          }, 1500);
+        }
+      } catch {
+        content.innerHTML = failedUI({ reason: "Tidak dapat menyemak status pembayaran." });
+      }
+    }
+
+    checkStatus();
   </script>
 </body>
 </html>
