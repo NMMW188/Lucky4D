@@ -96,6 +96,21 @@
     </div>
   </section>
 
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section id="testimoni" class="max-w-6xl mx-auto px-4 py-10">
+    <div class="rounded-3xl border border-amber-200 bg-white p-6 md:p-10 shadow-sm">
+      <div class="flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-amber-700">Apa kata pelanggan</h3>
+        <span class="hidden sm:inline-flex items-center gap-2 text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-700 border border-amber-300 pulse-glow">Disahkan Pembeli</span>
+      </div>
+      <div class="mt-6 grid md:grid-cols-3 gap-4 text-sm">
+        <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Tak perlu tunggu — bayar, bot terus DM. Laju!”</blockquote><figcaption class="mt-2 text-slate-500">— Faris</figcaption></figure>
+        <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Sangat private & mudah nak tebus kalau terlepas.”</blockquote><figcaption class="mt-2 text-slate-500">— Mira</figcaption></figure>
+        <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Berbaloi dengan harga. Proses memang smooth.”</blockquote><figcaption class="mt-2 text-slate-500">— Kelvin</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== CHECKOUT ===================== -->
   <section id="bayar" class="max-w-6xl mx-auto px-4 py-10">
     <div class="grid md:grid-cols-2 gap-8 items-start">
@@ -245,7 +260,7 @@
 
       // ======= Countdown to end of day (both bars) =======
       function tick(){
-        const now=new Date(); const end=new Date(); end.setHours(23,59,59,999);
+        const now=new Date(); const end=new Date(); end.setHours(19,0,0,0);
         const diff=end-now; const h=String(Math.max(0,Math.floor(diff/36e5))).padStart(2,'0'); const m=String(Math.max(0,Math.floor(diff%36e5/6e4))).padStart(2,'0'); const s=String(Math.max(0,Math.floor(diff%6e4/1e3))).padStart(2,'0');
         const t=`${h}:${m}:${s}`; const d=document.getElementById('dealCountdown'); const f=document.getElementById('floatCountdown'); if(d) d.textContent=t; if(f) f.textContent=t;
       }
