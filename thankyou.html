@@ -137,10 +137,6 @@
 
       let s = await fetchStatusOnce();
 
-      // Decide strictly by status_id:
-      //  - "1" => success (green)
-      //  - "3" => unsuccessful (red)
-      // If missing, we’ll poll briefly (gateway might be slower than redirect)
       const decide = (j) => j && j.status_id ? j.status_id : (j.state === "paid" ? "1" : (j.state === "failed" ? "3" : ""));
 
       let code = decide(s);
@@ -160,12 +156,12 @@
       } else if (code === "3") {
         content.innerHTML = failedUI(s);
       } else {
-        // Fallback if still unknown: show failed with generic reason
         content.innerHTML = failedUI({ reason: "Status pembayaran belum tersedia. Sila cuba semula sebentar lagi." });
       }
     }
 
     render();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
