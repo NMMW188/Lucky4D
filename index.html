@@ -17,6 +17,24 @@
     .pulse-glow { box-shadow: 0 0 0 0 rgba(245,158,11,.55); animation: pulse 2.2s infinite; }
     @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(245,158,11,.45);}70%{box-shadow:0 0 0 16px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);} }
   </style>
+
+  <!-- Referral: capture ?ref= and store for attribution -->
+  <script>
+    function getQP(name) {
+      const m = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+      return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : null;
+    }
+    (function initReferrer(){
+      const ref = getQP('ref');
+      if (ref) {
+        try { localStorage.setItem('ramal_referrer', ref.trim()); } catch {}
+        document.addEventListener('DOMContentLoaded', () => {
+          const badge = document.getElementById('ref-badge');
+          if (badge) badge.textContent = `Referred by: ${ref}`;
+        });
+      }
+    })();
+  </script>
 </head>
 <body class="bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900">
   <!-- PROMO BAR -->
@@ -48,7 +66,7 @@
   </header>
 
   <!-- HERO -->
-  <section id="home" class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+  <section id="home" class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <div class="grid md:grid-cols-2 gap-10 items-center">
       <div>
         <div class="inline-flex items-center gap-2 rounded-full border border-amber-200 px-3 py-1 text-xs bg-amber-50 text-amber-700 shadow-sm">🧠 Dikuasakan AI • 🔒 Privasi Terjamin • ⚡ Hasil Segera</div>
@@ -68,7 +86,8 @@
           <a href="#bayar" class="rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold px-6 py-3 shadow hover:opacity-90 shimmer-btn glow-btn inline-flex items-center justify-center">Dapatkan Sekarang</a>
           <a href="#harga" class="rounded-2xl border border-amber-300 px-6 py-3 hover:bg-amber-50">Lihat Harga</a>
         </div>
-        <p class="mt-3 text-xs text-slate-500">*Untuk hiburan sahaja — tiada jaminan kemenangan.</p>
+        <div id="ref-badge" class="mt-3 text-xs text-slate-500"></div>
+        <p class="mt-1 text-[11px] text-slate-500">*Untuk hiburan sahaja — tiada jaminan kemenangan.</p>
       </div>
     </div>
   </section>
@@ -109,7 +128,7 @@
         <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Ong lai lai. terima kasih Lucky4D.”</blockquote><figcaption class="mt-2 text-slate-500">— Chooi</figcaption></figure>
         <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Terima kasih Lucky4D! Dapat RM5,000 minggu ni.”</blockquote><figcaption class="mt-2 text-slate-500">— Devaraj</figcaption></figure>
         <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Saya tak harap lebih, tapi 2 minggu guna, dah balik modal 10 kali ganda. Kalau saya tak cuba hari tu, memang rugi besar.”</blockquote><figcaption class="mt-2 text-slate-500">— Steven</figcaption></figure>
-	 </div>
+     </div>
     </div>
   </section>
 
@@ -168,6 +187,21 @@
         </div>
         <p class="mt-3 text-xs text-slate-500">Setiap Payment Reference No hanya boleh ditebus oleh satu akaun Telegram.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- REFERRAL PROGRAM (new) -->
+  <section id="referral" class="max-w-6xl mx-auto px-4 pb-12">
+    <div class="rounded-3xl border border-emerald-200 bg-white p-6">
+      <h3 class="text-2xl font-bold text-emerald-700">🎁 Program Rujukan</h3>
+      <p class="mt-1 text-sm text-slate-700">Tetapkan nama rujukan anda (huruf/nombor sahaja). Kongsikan link anda; bila rakan membeli (RM5) dan pembayaran berjaya, ganjaran akan direkod.</p>
+      <div class="mt-3 flex items-center gap-2 flex-wrap">
+        <input id="my-ref-input" placeholder="cth: Ali88" maxlength="20"
+               class="rounded-xl border px-3 py-2 border-emerald-300 focus:border-emerald-500" />
+        <button id="save-ref-btn" class="rounded-xl bg-emerald-600 text-white px-4 py-2">Simpan</button>
+      </div>
+      <div id="my-ref-output" class="mt-3 font-semibold"></div>
+      <p class="mt-2 text-xs text-slate-500">Contoh ganjaran: 1 nombor percuma / RM1 setiap rujukan berjaya. (Self-referral tidak dikira.)</p>
     </div>
   </section>
 
@@ -264,6 +298,34 @@
       function renderSlots(n){ const el=document.getElementById('slotsLeft'); if(el) el.textContent=String(Math.max(n,2)); }
       function updateSlots(delta){ const today=new Date().toISOString().slice(0,10); const saved=localStorage.getItem('rn_slots_date'); if(saved!==today) initSlots(); let left=Number(localStorage.getItem('rn_slots_left')||'0'); left=Math.max(left+(delta||0),2); localStorage.setItem('rn_slots_left',String(left)); renderSlots(left); }
       initSlots();
+    });
+  </script>
+
+  <!-- Referral: personal link generator -->
+  <script>
+    // Build base like https://{user}.github.io/Lucky4D/
+    const RN_DOMAIN_BASE = window.location.origin + (window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.replace(/\/[^/]*$/, '/'));
+    function sanitizeRefName(s){ return (s||'').toString().trim().replace(/[^a-zA-Z0-9_-]/g,'').slice(0,20); }
+    function renderMyRef(){
+      const my = localStorage.getItem('ramal_myref') || '';
+      const out = document.getElementById('my-ref-output');
+      if (!out) return;
+      if (my) {
+        const link = `${RN_DOMAIN_BASE}?ref=${encodeURIComponent(my)}`;
+        out.innerHTML = `Link rujukan anda: <a class="underline text-emerald-700" href="${link}">${link}</a>`;
+      } else {
+        out.textContent = '';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('save-ref-btn')?.addEventListener('click', () => {
+        const raw = document.getElementById('my-ref-input').value;
+        const clean = sanitizeRefName(raw);
+        if (!clean) return alert('Masukkan huruf/nombor sahaja.');
+        try { localStorage.setItem('ramal_myref', clean); } catch {}
+        renderMyRef();
+      });
+      renderMyRef();
     });
   </script>
 </body>
