@@ -132,6 +132,36 @@
       return r.json().catch(()=>({ state: "unknown" }));
     }
 
+    // --- Referral helpers ---
+    function getReferrer(){ try { return localStorage.getItem('ramal_referrer'); } catch { return null; } }
+    function getMyRef(){ try { return localStorage.getItem('ramal_myref') || ''; } catch { return ''; } }
+    function clearReferrer(){ try { localStorage.removeItem('ramal_referrer'); } catch {} }
+    function isSelfReferral(referrer, myref){ return referrer && myref && referrer === myref; }
+
+    // OPTIONAL admin notifications/logging (fill to enable)
+    async function notifyTelegram(referrer, billcode, amount){
+      const BOT_TOKEN = ""; // e.g. 123456789:AA-...
+      const CHAT_ID   = ""; // e.g. -100123456789 (group) or your user id
+      if (!BOT_TOKEN || !CHAT_ID) return;
+      const text = `✅ Referral: ${referrer}\nBill: ${billcode}\nAmount: RM${amount}\nStatus: SUCCESS`;
+      const url  = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      try {
+        await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ chat_id: CHAT_ID, text }) });
+      } catch(e){ console.warn('Telegram notify failed', e); }
+    }
+
+    async function logToSheet(referrer, billcode, amount, statusId){
+      const SHEET_WEBAPP_URL = ""; // paste your Google Apps Script Web App URL if you want logging
+      if (!SHEET_WEBAPP_URL) return;
+      try{
+        await fetch(SHEET_WEBAPP_URL, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ ts:new Date().toISOString(), referrer, billcode, amount, status_id: statusId })
+        });
+      } catch(e){ console.warn('Sheet logging failed', e); }
+    }
+
     async function render() {
       content.innerHTML = skeletonUI();
 
@@ -153,8 +183,23 @@
       if (code === "1") {
         content.innerHTML = successUI(s);
         wireCopy();
+
+        // --- Referral attribution (SUCCESS ONLY)
+        const referrer = getReferrer();
+        const myref = getMyRef();
+        const billcode = s.ref || "";       // worker returns Payment Reference No as 'ref'
+        const amount   = "5.00";
+
+        if (referrer && !isSelfReferral(referrer, myref)) {
+          await Promise.all([
+            notifyTelegram(referrer, billcode, amount),
+            logToSheet(referrer, billcode, amount, code)
+          ]);
+          clearReferrer(); // prevent double counting on refresh/return
+        }
       } else if (code === "3") {
         content.innerHTML = failedUI(s);
+        // No referral attribution on failure
       } else {
         content.innerHTML = failedUI({ reason: "Status pembayaran belum tersedia. Sila cuba semula sebentar lagi." });
       }
