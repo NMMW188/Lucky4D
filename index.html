@@ -7,7 +7,6 @@
   <meta name="description" content="RamalNasib menjana set nombor bertuah menggunakan analitik corak & AI. Bayar melalui FPX Payment, terima terus secara peribadi di Telegram. Privasi terjamin, anti-share watermark." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* CTA effects */
     .glow-btn { box-shadow: 0 8px 24px rgba(217,119,6,0.35), 0 2px 8px rgba(217,119,6,0.2); }
     .glow-btn:hover { box-shadow: 0 10px 32px rgba(217,119,6,0.45), 0 4px 12px rgba(217,119,6,0.25); }
     .shimmer-btn { position: relative; overflow: hidden; }
@@ -20,10 +19,10 @@
   </style>
 </head>
 <body class="bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900">
-  <!-- ============== PROMO BAR (with countdown) ============== -->
+  <!-- PROMO BAR -->
   <div class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white text-sm">
     <div class="max-w-6xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4 text-center sm:text-left">
-      <span class="flex items-center gap-2"><strong>🔥 Promosi Pelancaran:</strong> Hanya RM10 untuk akses penuh RamalNasib!</span>
+      <span class="flex items-center gap-2"><strong>🔥 Promosi Pelancaran:</strong> Hanya <strong>RM5</strong> untuk akses penuh RamalNasib!</span>
       <div class="flex items-center gap-4">
         <span class="text-white/90">Tamat hari ini dalam <strong id="dealCountdown">23:59:59</strong></span>
         <a href="#bayar" class="underline font-semibold">Dapatkan Sekarang →</a>
@@ -31,7 +30,7 @@
     </div>
   </div>
 
-  <!-- ===================== NAV ===================== -->
+  <!-- NAV -->
   <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-amber-200">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -48,7 +47,7 @@
     </div>
   </header>
 
-  <!-- ===================== HERO ===================== -->
+  <!-- HERO -->
   <section id="home" class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <div class="grid md:grid-cols-2 gap-10 items-center">
       <div>
@@ -61,7 +60,7 @@
             <div class="flex items-start gap-3"><span class="mt-1 w-2.5 h-2.5 rounded-full bg-amber-500"></span><p><strong>9 set bernilai</strong> — 3× Standard, 3× Hot, 3× Wildcard</p></div>
             <div class="flex items-start gap-3"><span class="mt-1 w-2.5 h-2.5 rounded-full bg-amber-500"></span><p><strong>Watermark unik</strong> dgn <span class="font-semibold text-amber-700">Payment Reference No</span></p></div>
             <div class="flex items-start gap-3"><span class="mt-1 w-2.5 h-2.5 rounded-full bg-amber-500"></span><p><strong>Tebus manual</strong>: <code class="px-1.5 py-0.5 rounded bg-white/70 border">/claim &lt;Payment Reference No&gt;</code></p></div>
-            <div class="flex items-start gap-3"><span class="mt-1 w-2.5 h-2.5 rounded-full bg-amber-500"></span><p><strong>Saluran</strong>: Telegram (DM peribadi)</p></div>
+            <div class="flex items-start gap-3"><span class="mt-1 w-2.5 h-2.5 rounded-full bg-amber-500"></span><p><strong>Saluran</strong>: Telegram</p></div>
           </div>
         </div>
 
@@ -74,7 +73,7 @@
     </div>
   </section>
 
-  <!-- ===================== PRICING ===================== -->
+  <!-- PRICING -->
   <section id="harga" class="max-w-6xl mx-auto px-4 py-10">
     <div class="rounded-3xl border border-amber-200 bg-white p-6">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
@@ -85,7 +84,7 @@
         </div>
       </div>
       <p class="text-slate-600 mt-1">9 set bernilai: 3× Standard, 3× Hot, 3× Wildcard</p>
-      <div class="mt-4 text-4xl font-extrabold tracking-tight text-amber-700">RM 10</div>
+      <div class="mt-4 text-4xl font-extrabold tracking-tight text-amber-700">RM 5</div>
       <ul class="mt-4 text-sm space-y-1 text-slate-700">
         <li>• Penghantaran segera ke Telegram</li>
         <li>• Watermark anti-share</li>
@@ -96,7 +95,7 @@
     </div>
   </section>
 
-  <!-- ===================== TESTIMONIALS ===================== -->
+  <!-- TESTIMONIALS -->
   <section id="testimoni" class="max-w-6xl mx-auto px-4 py-10">
     <div class="rounded-3xl border border-amber-200 bg-white p-6 md:p-10 shadow-sm">
       <div class="flex items-center justify-between">
@@ -110,11 +109,11 @@
         <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Ong lai lai. terima kasih Lucky4D.”</blockquote><figcaption class="mt-2 text-slate-500">— Chooi</figcaption></figure>
         <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Terima kasih Lucky4D! Dapat RM5,000 minggu ni.”</blockquote><figcaption class="mt-2 text-slate-500">— Devaraj</figcaption></figure>
         <figure class="rounded-2xl border border-amber-100 p-4 bg-gradient-to-b from-white to-amber-50"><blockquote>“Saya tak harap lebih, tapi 2 minggu guna, dah balik modal 10 kali ganda. Kalau saya tak cuba hari tu, memang rugi besar.”</blockquote><figcaption class="mt-2 text-slate-500">— Steven</figcaption></figure>
-      </div>
+	 </div>
     </div>
   </section>
 
-  <!-- ===================== CHECKOUT ===================== -->
+  <!-- CHECKOUT -->
   <section id="bayar" class="max-w-6xl mx-auto px-4 py-10">
     <div class="grid md:grid-cols-2 gap-8 items-start">
       <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
@@ -130,7 +129,9 @@
 
         <div class="mt-4">
           <p class="text-sm font-semibold text-slate-700">Saluran Penghantaran</p>
-          <div class="mt-2 text-sm">Penghantaran melalui <span class="font-semibold">Telegram</span> (DM peribadi)</div>
+          <div class="mt-2 flex gap-4">
+            <label class="flex items-center gap-2 text-sm"><input type="radio" name="channel" id="chTg" value="telegram" checked /> Telegram</label>
+          </div>
         </div>
 
         <div id="tgWrap" class="mt-3">
@@ -140,11 +141,8 @@
           <p class="mt-1 text-xs text-slate-500">Buka bot <a href="https://t.me/Lucky4D_bot" target="_blank" class="underline text-amber-700">@Lucky4D_bot</a> dan hantar <code>/start</code>.</p>
         </div>
 
-        <!-- Primary action (anchor for graceful noscript) -->
-        <a id="payLink" href="#" class="mt-5 w-full inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold py-3 shadow hover:opacity-90 shimmer-btn glow-btn">Teruskan ke Pembayaran</a>
-        <noscript>
-          <p class="mt-2 text-xs">JavaScript dimatikan. <a href="#" class="underline text-amber-700">Pergi ke halaman FPX Payment</a>.</p>
-        </noscript>
+        <button id="payBtn" class="mt-5 w-full inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold py-3 shadow hover:opacity-90 shimmer-btn glow-btn">Teruskan ke Pembayaran (RM5)</button>
+
         <div class="mt-3 flex items-center gap-2 text-xs text-slate-500"><span class="w-4 h-4 rounded-full bg-amber-200 border border-amber-400"></span>Bayaran selamat melalui FPX Payment.</div>
         <p class="mt-2 text-xs text-slate-500">Selepas berjaya: jika belum terima DM, tebus manual di Telegram dengan <code>/claim &lt;Payment Reference No&gt;</code>.</p>
       </div>
@@ -173,7 +171,7 @@
     </div>
   </section>
 
-  <!-- ===================== FAQ ===================== -->
+  <!-- FAQ -->
   <section id="faq" class="max-w-6xl mx-auto px-4 py-10">
     <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
       <h3 class="text-2xl font-bold text-amber-700">Soalan Lazim</h3>
@@ -181,12 +179,12 @@
         <div><p class="font-semibold">Dijamin menang?</p><p class="text-slate-600">Tiada jaminan. Ini hiburan & cadangan berdasarkan corak. Guna kebijaksanaan sendiri.</p></div>
         <div><p class="font-semibold">Tak terima DM?</p><p class="text-slate-600">Tebus manual di TELEGRAM: hantar <code>/claim &lt;Payment Reference No&gt;</code> di bot <a href="https://t.me/Lucky4D_bot" target="_blank" class="underline text-amber-700">@Lucky4D_bot</a>.</p></div>
         <div><p class="font-semibold">Boleh kongsi set?</p><p class="text-slate-600">Tidak digalakkan. Set ditanda dengan Payment Reference No pembeli.</p></div>
-        <div><p class="font-semibold">WhatsApp auto?</p><p class="text-slate-600">Akan datang. Buat masa ini, melalui telegram sahaja.</p></div>
+        <div><p class="font-semibold">WhatsApp auto?</p><p class="text-slate-600">Buat masa ini, Telegram sahaja.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== FOOTER ===================== -->
+  <!-- FOOTER -->
   <footer class="border-t border-amber-200 bg-white">
     <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-600 flex items-center justify-between">
       <span>© <span id="year"></span> RamalNasib</span>
@@ -201,133 +199,71 @@
     ⏳ <span id="floatCountdown">--:--:--</span>
   </div>
 
-  <!-- ===================== SCRIPTS ===================== -->
   <script>
-    // Your Cloudflare Worker origin (hosts /bill and /toyyib/callback)
-    const WORKER_ORIGIN = "https://ramalnasib-worker.nickson-richard87.workers.dev";
+    const WORKER_BASE = "https://ramalnasib-worker.nickson-richard87.workers.dev";
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Footer year
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      const year = document.getElementById('year'); if (year) year.textContent = new Date().getFullYear();
 
-      // Form elements
-      const nameEl  = document.getElementById('name');
+      const nameEl = document.getElementById('name');
       const emailEl = document.getElementById('email');
-      const tgUser  = document.getElementById('tgUser');
-      const payLink = document.getElementById('payLink');
+      const tgUser = document.getElementById('tgUser');
+      const payBtn = document.getElementById('payBtn');
 
-      // Claim helper
-      const refInput    = document.getElementById('refInput');
-      const copyRefBtn  = document.getElementById('copyRefBtn');
-      const copyClaimBtn= document.getElementById('copyClaimBtn');
-      const copyNote    = document.getElementById('copyNote');
+      const refInput = document.getElementById('refInput');
+      const copyRefBtn = document.getElementById('copyRefBtn');
+      const copyClaimBtn = document.getElementById('copyClaimBtn');
+      const copyNote = document.getElementById('copyNote');
 
-      // Load saved profile if any
-      (function loadProfile(){
-        try {
-          const p = JSON.parse(localStorage.getItem('rn_profile')||'null');
-          if (!p) return;
-          if (nameEl)  nameEl.value  = p.name  || '';
-          if (emailEl) emailEl.value = p.email || '';
-          if (tgUser)  tgUser.value  = p.tg    || '';
-        } catch {}
-      })();
+      function saveProfile(){
+        const p = { name:nameEl?.value?.trim()||'', email:emailEl?.value?.trim()||'', tg:(tgUser?.value||'').replace(/^@/,'').trim() };
+        try { localStorage.setItem('rn_profile', JSON.stringify(p)); } catch {}
+        return p;
+      }
+      function loadProfile(){
+        try { const p = JSON.parse(localStorage.getItem('rn_profile')||'null'); if(!p) return; nameEl.value=p.name||''; emailEl.value=p.email||''; tgUser.value=p.tg||''; } catch {}
+      }
+      loadProfile();
 
-      // Build bill and redirect to FPX
-      async function goToPayment(e){
-        e?.preventDefault?.();
-
-        const name  = (nameEl?.value  || '').trim();
-        const email = (emailEl?.value || '').trim();
-        const tg    = (tgUser?.value  || '').replace(/^@/, '').trim();
-
-        if (!name || !email || !tg) {
-          alert('Sila lengkapkan Nama, Email dan Telegram Username.');
+      async function goPay(){
+        const p = saveProfile();
+        if (!p.name || !p.email || !p.tg) {
+          alert('Sila isi Nama, Email dan Telegram Username (tanpa @).');
           return;
         }
-
         try {
-          const r = await fetch(`${WORKER_ORIGIN}/bill`, {
+          const r = await fetch(`${WORKER_BASE}/bill`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, tg })
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ name: p.name, email: p.email, tg: p.tg, phone: '0100000000' })
           });
           const j = await r.json();
-          if (j?.url) {
-            try { localStorage.setItem('rn_profile', JSON.stringify({ name, email, channel:'telegram', tg })); } catch {}
-            window.location.href = j.url; // redirect to FPX checkout
+          if (j.url) {
+            location.href = j.url;
           } else {
-            console.error(j);
             alert('Maaf, ralat membuat bil. Sila cuba lagi.');
           }
-        } catch (err) {
-          console.error(err);
-          alert('Ralat rangkaian semasa membuat bil.');
+        } catch (e) {
+          alert('Maaf, ralat rangkaian. Sila cuba lagi.');
         }
       }
-      payLink?.addEventListener('click', goToPayment);
+      payBtn?.addEventListener('click', goPay);
 
-      // Copy helpers
-      async function copy(text){
-        try {
-          await navigator.clipboard.writeText(text);
-          copyNote?.classList.remove('hidden');
-          setTimeout(()=>copyNote?.classList.add('hidden'), 1500);
-        } catch { alert('Tidak dapat salin.'); }
-      }
-      copyRefBtn?.addEventListener('click', ()=>{
-        const v = refInput?.value?.trim();
-        if (!v) return alert('Masukkan Payment Reference No.');
-        copy(v);
-      });
-      copyClaimBtn?.addEventListener('click', ()=>{
-        const v = refInput?.value?.trim();
-        if (!v) return alert('Masukkan Payment Reference No.');
-        copy(`/claim ${v}`);
-      });
+      async function copy(text){ try { await navigator.clipboard.writeText(text); copyNote?.classList.remove('hidden'); setTimeout(()=>copyNote?.classList.add('hidden'), 1500);} catch { alert('Tidak dapat salin.'); } }
+      copyRefBtn?.addEventListener('click', ()=>{ const v=refInput?.value?.trim(); if(!v) return alert('Masukkan Payment Reference No.'); copy(v); });
+      copyClaimBtn?.addEventListener('click', ()=>{ const v=refInput?.value?.trim(); if(!v) return alert('Masukkan Payment Reference No.'); copy(`/claim ${v}`); });
 
-      // ======= Countdown to 7:00 PM (both bars) =======
       function tick(){
         const now=new Date(); const end=new Date(); end.setHours(19,0,0,0);
-        const diff=end-now;
-        const h=String(Math.max(0,Math.floor(diff/36e5))).padStart(2,'0');
-        const m=String(Math.max(0,Math.floor(diff%36e5/6e4))).padStart(2,'0');
-        const s=String(Math.max(0,Math.floor(diff%6e4/1e3))).padStart(2,'0');
-        const t=`${h}:${m}:${s}`;
-        const d=document.getElementById('dealCountdown');
-        const f=document.getElementById('floatCountdown');
-        if(d) d.textContent=t; if(f) f.textContent=t;
+        const diff=end-now; const h=String(Math.max(0,Math.floor(diff/36e5))).padStart(2,'0'); const m=String(Math.max(0,Math.floor(diff%36e5/6e4))).padStart(2,'0'); const s=String(Math.max(0,Math.floor(diff%6e4/1e3))).padStart(2,'0');
+        const t=`${h}:${m}:${s}`; const d=document.getElementById('dealCountdown'); const f=document.getElementById('floatCountdown'); if(d) d.textContent=t; if(f) f.textContent=t;
       }
       tick(); setInterval(tick, 1000);
 
-      // ======= Daily slots (scarcity) =======
-      function initSlots(){
-        const today=new Date().toISOString().slice(0,10);
-        const saved=localStorage.getItem('rn_slots_date');
-        let left=Number(localStorage.getItem('rn_slots_left')||'0');
-        if(saved!==today||!left){
-          left=Math.floor(Math.random()*7)+9;
-          localStorage.setItem('rn_slots_date',today);
-          localStorage.setItem('rn_slots_left',String(left));
-        }
-        renderSlots(left);
-      }
-      function renderSlots(n){
-        const el=document.getElementById('slotsLeft');
-        if(el) el.textContent=String(Math.max(n,2));
-      }
-      function updateSlots(delta){
-        const today=new Date().toISOString().slice(0,10);
-        const saved=localStorage.getItem('rn_slots_date');
-        if(saved!==today) initSlots();
-        let left=Number(localStorage.getItem('rn_slots_left')||'0');
-        left=Math.max(left+(delta||0),2);
-        localStorage.setItem('rn_slots_left',String(left));
-        renderSlots(left);
-      }
+      function initSlots(){ const today=new Date().toISOString().slice(0,10); const saved=localStorage.getItem('rn_slots_date'); let left=Number(localStorage.getItem('rn_slots_left')||'0'); if(saved!==today||!left){ left=Math.floor(Math.random()*7)+9; localStorage.setItem('rn_slots_date',today); localStorage.setItem('rn_slots_left',String(left)); } renderSlots(left); }
+      function renderSlots(n){ const el=document.getElementById('slotsLeft'); if(el) el.textContent=String(Math.max(n,2)); }
+      function updateSlots(delta){ const today=new Date().toISOString().slice(0,10); const saved=localStorage.getItem('rn_slots_date'); if(saved!==today) initSlots(); let left=Number(localStorage.getItem('rn_slots_left')||'0'); left=Math.max(left+(delta||0),2); localStorage.setItem('rn_slots_left',String(left)); renderSlots(left); }
       initSlots();
-      payLink?.addEventListener('click', ()=>{ updateSlots(-1); });
     });
   </script>
 </body>
